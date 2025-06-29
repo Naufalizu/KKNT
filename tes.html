@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Peta KML dengan CesiumJS</title>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <style>
+    html, body, #cesiumContainer {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+    const viewer = new Cesium.Viewer('cesiumContainer', {
+      terrainProvider: Cesium.createWorldTerrain()
+    });
+
+    Cesium.KmlDataSource.load('BATAS AREA FIX AGROWISATA 1.kml', {
+      camera: viewer.scene.camera,
+      canvas: viewer.scene.canvas
+    }).then(function(dataSource) {
+      viewer.dataSources.add(dataSource);
+      viewer.flyTo(dataSource);
+    });
+  </script>
+</body>
+</html>
